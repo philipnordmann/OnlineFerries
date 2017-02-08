@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
+<navigation-rule>
+	<description>Login</description>
+	<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>retry</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+		</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<description>Routes</description>
+	<from-view-id>/index.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/selectRoute.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>retry</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<description>Trips</description>
+	<from-view-id>/selectRoute.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/selectTrip.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>retry</from-outcome>
+			<to-view-id>/selectRoute.xhtml</to-view-id>
+		</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<description>Reservation</description>
+	<from-view-id>/selectTrip.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/enterReservation.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>retry</from-outcome>
+			<to-view-id>/selectTrip.xhtml</to-view-id>
+		</navigation-case>
+</navigation-rule>
+<navigation-rule>
+	<description>Kundentyp</description>
+	<from-view-id>/enterReservation.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>successSelect</from-outcome>
+			<to-view-id>/auswahlKundentyp.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>retry</from-outcome>
+			<to-view-id>/enterReservation.xhtml</to-view-id>
+		</navigation-case>
+</navigation-rule>
+
+</faces-config>

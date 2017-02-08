@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core">
+		
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>#{msg.onlineferries_login_title}</title>
+</h:head>
+
+<body>
+
+	<f:view locale="#{localeHandler.locale}">
+		<h:outputStylesheet library="css" name="style.css"/>
+
+		<div class="header">
+  			<h1>#{msg.onlineferries_welcome_message}</h1>
+		</div>
+
+		<div class="row">
+
+			<div class="col-3 menu">
+				<ul>
+    				<li><a href="index.xhtml">#{msg.onlineferries_index_back}</a></li>
+     				<li>Kontakt</li>
+  				</ul>
+			</div>
+
+			<div class="col-6">			
+				<p style="text-align:center;">
+				<h:form>
+					<h:panelGrid columns ="2">
+						<f:facet name="header">#{msg.onlineferries_login_form_title}</f:facet>
+						<h:outputLabel value="#{msg.onlineferries_login_form_username}" for="username"/>
+						<h:inputText id="username" value="#{loginHandler.username}" 
+							required ="true" requiredMessage="#{msg.onlineferries_login_form_required_username}" validator="#{loginHandler.validateUsername}"/>
+						<h:outputLabel value="#{msg.onlineferries_login_form_password}" for="password"/>
+						<h:inputSecret id="password" value="#{loginHandler.password}" 
+							required ="true" requiredMessage="#{msg.onlineferries_login_form_required_password}" validator="#{loginHandler.validatePassword}"/>		
+						<h:panelGroup/>
+						<h:commandButton action="#{loginHandler.login}" value="#{msg.onlineferries_login_form_submit}"/>	
+					</h:panelGrid>
+					<div align="center"><h:messages showDetail="true" showSummary="false" styleClass="message"/></div>
+				</h:form>
+				</p>
+			</div>
+			
+			<div class="col-3 right">
+  				<div class="aside">
+					<h2>#{onlineferries_index_title2}</h2>
+					<div><h:graphicImage library="images" name="schiff.GIF"/></div>
+  				</div>
+			</div>
+		</div>
+
+		<div class="footer">
+  			<p id="footer">Resize the browser window to see how the content respond to the resizing.</p>
+		</div>
+								
+	</f:view>
+	
+</body>
+
+
+</html>
