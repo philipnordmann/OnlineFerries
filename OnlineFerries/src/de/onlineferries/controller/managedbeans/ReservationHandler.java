@@ -62,9 +62,6 @@ public class ReservationHandler {
 
 	public void validateTravellerName(FacesContext context,
 			UIComponent component, Object obj) {
-		System.out.println("Communication-Modul: v1");
-		System.out.println("===============================");
-		System.out.println("Prüfung der Funktionalität.");
 
 	}
 

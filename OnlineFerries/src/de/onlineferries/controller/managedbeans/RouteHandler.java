@@ -38,11 +38,11 @@ public class RouteHandler {
 			return "retry";
 	}
 
-	public List<RouteView> getRoutes() {
+	public List<RouteView> getRouteViews() {
 		return routeViews;
 	}
 
-	public void setRoutes(List<RouteView> routeViews) {
+	public void setRouteViews(List<RouteView> routeViews) {
 		this.routeViews = routeViews;
 	}
 
