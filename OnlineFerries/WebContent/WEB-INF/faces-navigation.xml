@@ -5,14 +5,6 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
 
 <navigation-rule>
-	<description>Login</description>
-	<from-view-id>/login.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>retry</from-outcome>
-			<to-view-id>/login.xhtml</to-view-id>
-		</navigation-case>
-</navigation-rule>
-<navigation-rule>
 	<description>Routes</description>
 	<from-view-id>/index.xhtml</from-view-id>
 		<navigation-case>
@@ -46,18 +38,6 @@
 		<navigation-case>
 			<from-outcome>retry</from-outcome>
 			<to-view-id>/selectTrip.xhtml</to-view-id>
-		</navigation-case>
-</navigation-rule>
-<navigation-rule>
-	<description>Kundentyp</description>
-	<from-view-id>/enterReservation.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>successSelect</from-outcome>
-			<to-view-id>/auswahlKundentyp.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>retry</from-outcome>
-			<to-view-id>/enterReservation.xhtml</to-view-id>
 		</navigation-case>
 </navigation-rule>
 

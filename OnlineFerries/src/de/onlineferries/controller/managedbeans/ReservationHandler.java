@@ -1,43 +1,53 @@
 package de.onlineferries.controller.managedbeans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 
+import de.onlineferries.view.CabinView;
+import de.onlineferries.view.ReservationView;
 import de.onlineferries.view.ShipCabinView;
 import de.onlineferries.view.TravellerView;
 
 @ManagedBean
-@ApplicationScoped
-public class ReservationHandler {
+@SessionScoped
+public class ReservationHandler implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@ManagedProperty("#{serviceLocatorBean}")
 	private ServiceLocator serviceLocator;
 	@ManagedProperty("#{routeHandler}")
 	private RouteHandler routeHandler;
 	@ManagedProperty("#{tripHandler}")
 	private TripHandler tripHandler;
+	@ManagedProperty("#{loginHandler}")
+	private LoginHandler loginHandler;
 
 	private List<ShipCabinView> shipCabins;
 	private int cars;
 	private int travellers;
 	private List<TravellerView> travellerNames;
 	private double reservationPrice;
+	private List<ReservationView> reservations;
+	private ReservationView currentReservation;
 
 	public int[] getTravellerValues() {
 		return new int[] { 0, 1, 2, 3, 4, 5, 6 };
 	}
 
 	public String enterReservation() {
-		System.out.println(routeHandler.getShip().getShip_id());
-		shipCabins = serviceLocator.getShipService().findAllShipCabins(
-				routeHandler.getShip().getShip_id());
+		shipCabins = serviceLocator.getShipService().findAllShipCabins(routeHandler.getShip().getShip_id());
 		if (shipCabins != null)
 			return "success";
 		else
@@ -54,14 +64,11 @@ public class ReservationHandler {
 	}
 
 	public String selectCustomerType() {
-		reservationPrice = serviceLocator.getReservationService()
-				.getReservationPrice(tripHandler.getTrip().getId(), shipCabins,
-						cars, travellers);
+
 		return "successSelect";
 	}
 
-	public void validateTravellerName(FacesContext context,
-			UIComponent component, Object obj) {
+	public void validateTravellerName(FacesContext context, UIComponent component, Object obj) {
 
 	}
 
@@ -122,11 +129,73 @@ public class ReservationHandler {
 	}
 
 	public double getReservationPrice() {
+		reservationPrice = serviceLocator.getReservationService().getReservationPrice(tripHandler.getTrip().getId(),
+				shipCabins, cars, travellers);
 		return reservationPrice;
 	}
 
 	public void setReservationPrice(double reservationPrice) {
 		this.reservationPrice = reservationPrice;
+	}
+
+	public LoginHandler getLoginHandler() {
+		return loginHandler;
+	}
+
+	public void setLoginHandler(LoginHandler loginHandler) {
+		this.loginHandler = loginHandler;
+	}
+
+	public String reserve() {
+		int customer_id = loginHandler.getCustomer().getCustomer_id();
+		serviceLocator.getReservationService().reserveTrip(tripHandler.getTrip().getId(), customer_id, shipCabins, cars,
+				travellerNames);
+		return "sucess";
+	}
+
+	public String changeReservation(int id) {
+		serviceLocator.getReservationService().initializeReservation(id, routeHandler, tripHandler, this);
+		currentReservation = reservations.stream().filter(r -> r.getId() == id).findFirst().get();
+		shipCabins = serviceLocator.getShipService()
+				.findAllShipCabins(currentReservation.getTrip().getRoute().getShip().getShip_id());
+		for (CabinView cabin : currentReservation.getCabins()) {
+			for (ShipCabinView view : shipCabins) {
+				if (view.getCabin_id().equals(cabin.getId())) {
+					view.setRes_count(cabin.getRes_count());
+					break;
+				}
+			}
+			System.out.println(cabin.getRes_count());
+		}
+		cars = currentReservation.getCars();
+		travellerNames = currentReservation.getTravellers().stream().collect(Collectors.toList());
+		return "/restricted/showReservation";
+	}
+	
+	public String changeSomething() {
+		serviceLocator.getReservationService().changeReservation(currentReservation.getId(), shipCabins, cars, travellerNames);
+		return "/restricted/changeReservation";
+	}
+
+	public List<ReservationView> getReservations() {
+		List<ReservationView> list;
+		if ((list = serviceLocator.getReservationService()
+				.getReservations(loginHandler.getCustomer().getCustomer_id())) != null) {
+			reservations = list;
+		}
+		return reservations;
+	}
+
+	public void setReservations(List<ReservationView> reservations) {
+		this.reservations = reservations;
+	}
+
+	public ReservationView getCurrentReservation() {
+		return currentReservation;
+	}
+
+	public void setCurrentReservation(ReservationView currentReservation) {
+		this.currentReservation = currentReservation;
 	}
 
 }

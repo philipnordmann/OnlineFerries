@@ -2,12 +2,17 @@ package de.onlineferries.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -16,6 +21,7 @@ public class Trip implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	@GeneratedValue
 	private Integer id;
 	private Route route;
 	private Date date;
@@ -23,6 +29,7 @@ public class Trip implements Serializable {
 	private Date arrival;
 	private double price_car;
 	private double price_passenger;
+	private Set<Reservation> reservations = new HashSet<>();
 	
 	@Id
 	@Column(name="trip_id")
@@ -76,6 +83,13 @@ public class Trip implements Serializable {
 	}
 	public void setPrice_passenger(double price_passenger) {
 		this.price_passenger = price_passenger;
+	}
+	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "trip")
+	public Set<Reservation> getReservations() {
+		return reservations;
+	}
+	public void setReservations(Set<Reservation> reservations) {
+		this.reservations = reservations;
 	}
 	
 }

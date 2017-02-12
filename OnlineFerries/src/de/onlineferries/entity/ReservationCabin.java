@@ -3,23 +3,37 @@ package de.onlineferries.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="reservation_cabin")
 @IdClass(ReservationCabinId.class)
 public class ReservationCabin {
 
+
+
 	@Id
-	@ManyToOne(optional = true)
+	@ManyToOne(optional = false)
+	@JoinColumn(name="reservation_id")
 	private Reservation reservation;
 	@Id
-	@ManyToOne(optional = true)
+	@JoinColumn(name="cabintype_id")
+	@ManyToOne(optional = false)
 	private Cabin cabin;
 
 	Integer cabin_index;
 	Integer count;
 
 	public ReservationCabin() {
+	}
+	
+	public ReservationCabin(Reservation reservation, Cabin cabin, Integer count) {
+		super();
+		this.reservation = reservation;
+		this.cabin = cabin;
+		this.count = count;
 	}
 
 	public Reservation getReservation() {

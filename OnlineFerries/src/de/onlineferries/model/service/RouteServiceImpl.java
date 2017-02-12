@@ -44,7 +44,7 @@ public class RouteServiceImpl implements RouteService {
 				.stream()
 				.forEach(
 						(t) -> {
-							trips.add(new TripView(t.getId(), t.getRoute(), t
+							trips.add(new TripView(t.getId(), new RouteView(t.getRoute().getId(),t.getRoute().getStart(),t.getRoute().getDestination()), t
 									.getDate(), t.getDeparture(), t
 									.getArrival(), t.getPrice_car(), t
 									.getPrice_passenger()));

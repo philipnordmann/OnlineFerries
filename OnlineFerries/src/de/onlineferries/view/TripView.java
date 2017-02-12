@@ -3,12 +3,10 @@ package de.onlineferries.view;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import de.onlineferries.entity.Route;
-
 public class TripView {
 
 	private Integer id;
-	private Route route;
+	private RouteView route;
 	private Date date;
 	private Date departure;
 	private Date arrival;
@@ -18,7 +16,7 @@ public class TripView {
 	public TripView() {
 	}
 	
-	public TripView(Integer id, Route route, Date date, Date departure,
+	public TripView(Integer id, RouteView route, Date date, Date departure,
 			Date arrival, double price_car, double price_passenger) {
 		super();
 		this.id = id;
@@ -36,10 +34,10 @@ public class TripView {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Route getRoute() {
+	public RouteView getRoute() {
 		return route;
 	}
-	public void setRoute(Route route) {
+	public void setRoute(RouteView route) {
 		this.route = route;
 	}
 	public Date getDate() {

@@ -40,7 +40,7 @@ public class ShipServiceImpl implements ShipService {
 				.stream()
 				.forEach(
 						(s) -> {
-							scv.add(new ShipCabinView(s.getCabin().getId(), s
+							scv.add(new ShipCabinView(s.getCabin().getCabintype_id(), s
 									.getCabin().getDescription(), s.getShip()
 									.getPassengers(), s.getCount(), s
 									.getPrice(), 0));

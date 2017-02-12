@@ -11,6 +11,7 @@ public class RouteView implements Serializable {
 	private Integer id;
 	private String start;
 	private String destination;
+	private ShipView ship;
 	
 	public RouteView() {
 	}
@@ -39,6 +40,14 @@ public class RouteView implements Serializable {
 	}
 	public void setDestination(String destination) {
 		this.destination = destination;
+	}
+
+	public ShipView getShip() {
+		return ship;
+	}
+
+	public void setShip(ShipView ship) {
+		this.ship = ship;
 	}
 	
 	

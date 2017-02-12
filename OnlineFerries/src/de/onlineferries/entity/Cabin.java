@@ -1,11 +1,13 @@
 package de.onlineferries.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,16 +17,17 @@ public class Cabin implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@GeneratedValue
-	private Integer id;
+	private Integer cabintype_id;
 	private String description;
 	private int passengers;
+	
+	private Set<ReservationCabin> reservationCabins = new HashSet<>();
 	
 	public Cabin() {}
 	
 	@Id
-	@Column(name="cabintype_id")
-	public Integer getId() { return id; }
-	public void setId(Integer id) { this.id = id; }
+	public Integer getCabintype_id() { return cabintype_id; }
+	public void setCabintype_id(Integer id) { this.cabintype_id = id; }
 
 	public String getDescription() {
 		return description;
@@ -40,6 +43,15 @@ public class Cabin implements Serializable {
 
 	public void setPassengers(int passengers) {
 		this.passengers = passengers;
+	}
+
+	@OneToMany(mappedBy="cabin")
+	public Set<ReservationCabin> getReservationCabins() {
+		return reservationCabins;
+	}
+
+	public void setReservationCabins(Set<ReservationCabin> reservationCabins) {
+		this.reservationCabins = reservationCabins;
 	}
 
 }

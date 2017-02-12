@@ -42,9 +42,13 @@
 						<h:inputSecret id="password" value="#{loginHandler.password}" 
 							required ="true" requiredMessage="#{msg.onlineferries_login_form_required_password}" validator="#{loginHandler.validatePassword}"/>		
 						<h:panelGroup/>
-						<h:commandButton action="#{loginHandler.login}" value="#{msg.onlineferries_login_form_submit}"/>	
+						<h:commandButton action="#{loginHandler.login}" value="#{msg.onlineferries_login_form_submit}"/>
+							
 					</h:panelGrid>
 					<div align="center"><h:messages showDetail="true" showSummary="false" styleClass="message"/></div>
+				</h:form>
+				<h:form>
+					<h:commandButton action="#{loginHandler.register}" value="#{msg.onlineferries_login_form_submit2}"/>
 				</h:form>
 				</p>
 			</div>

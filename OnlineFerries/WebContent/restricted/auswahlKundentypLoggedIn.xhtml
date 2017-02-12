@@ -38,8 +38,7 @@
 		<div class="col-3">
 			<h:form>
 				<h:panelGrid columns="1">
-					<h:button class="col-12" outcome="login.xhtml" value="#{msg.onlineferries_index_submit1}"/>	
-					<h:commandButton class="col-12" action="#{reservationHandler.back}" value="#{msg.onlineferries_sel_back}" immediate = "true"/>					
+					<h:commandButton class="col-12" action="/index.xhtml" value="#{msg.onlineferries_sel_back}" immediate = "true"/>					
 				</h:panelGrid>
 			</h:form>
 		</div>
@@ -47,6 +46,7 @@
 		<div class="col-6">
 
 			<h:panelGrid columns="1">
+				<h1 style="display:none">#{reservationHandler.reserve()}</h1>
 				<h:outputFormat value="#{msg.onlineferries_trip_currentroute}">
 					<f:param value="#{routeHandler.route.start}"/>
 					<f:param value="#{routeHandler.route.destination}"/>	

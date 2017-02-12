@@ -1,5 +1,7 @@
 package de.onlineferries.controller.managedbeans;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
@@ -14,8 +16,12 @@ import de.onlineferries.model.service.ShipServiceImpl;
 
 @ManagedBean
 @ApplicationScoped
-public class ServiceLocatorBean implements ServiceLocator {
+public class ServiceLocatorBean implements ServiceLocator, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private LoginService loginService;
 	private RouteService routeService;
 	private ShipService shipService;

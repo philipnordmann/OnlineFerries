@@ -9,7 +9,7 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<script type="text/javascript" src="enterReservation.js">
+	<script type="text/javascript" src="changeReservation.js">
 	</script>
 	<title>#{msg.onlineferries_index_title1}</title>
 </h:head>
@@ -40,8 +40,8 @@
 			<div class="col-3">
 				<h:form>
 					<h:panelGrid columns="1">
-						<h:button outcome="login.xhtml"
-							value="#{msg.onlineferries_index_submit1}" />
+						<h:button outcome="/index.xhtml"
+							value="#{msg.onlineferries_index_back}" />
 					</h:panelGrid>
 				</h:form>
 			</div>
@@ -51,7 +51,7 @@
 					<h4>#{msg.onlineferries_booking_select}</h4>
 				</div>
 				<hr />
-				<h:form>
+				<h:form id="main">
 
 					<h:panelGrid columns="1">
 						<h:outputFormat value="#{msg.onlineferries_trip_currentroute}">
@@ -105,7 +105,7 @@
 								<f:convertNumber type="currency" currencySymbol="EUR" />
 							</h:outputLabel>
 							<h:inputText id="cars" value="#{reservationHandler.cars}"
-								required="true" />
+								required="true"  />
 
 							<h:outputLabel value="#{msg.onlineferries_res1_lblTravellers}" />
 							<h:outputLabel id="passengerPrice"
@@ -138,8 +138,7 @@
 					</h:panelGrid>
 
 					<h:panelGrid columns="2">
-						<h:commandButton action="auswahlKundentyp.xhtml"
-							value="#{msg.onlineferries_res1_submit}" />
+						<h:commandButton action="#{reservationHandler.changeSomething()}" value="#{msg.onlineferries_booking_book}" />
 					</h:panelGrid>
 
 				</h:form>

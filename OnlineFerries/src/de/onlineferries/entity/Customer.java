@@ -1,11 +1,16 @@
 package de.onlineferries.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 @NamedQueries( {
 	@NamedQuery(
@@ -28,6 +33,7 @@ public class Customer implements Serializable {
 	Integer account_nr;
 	Integer bank_id;
 	String password;
+	Set<Reservation> reservations = new HashSet<Reservation>();
 	
 	public Customer() {}
 
@@ -39,6 +45,7 @@ public class Customer implements Serializable {
 	}
 
 	@Id
+	@GeneratedValue
 	public Integer getId() {
 		return id;
 	}
@@ -113,6 +120,16 @@ public class Customer implements Serializable {
 
 	public void setBank_id(Integer bank_id) {
 		this.bank_id = bank_id;
+	}
+
+	@OneToMany(mappedBy="customer", cascade=CascadeType.PERSIST)
+	public Set<Reservation> getReservations() {
+		return reservations;
+	}
+	
+	
+	public void setReservations(Set<Reservation> reservations) {
+		this.reservations = reservations;
 	}
 
 }

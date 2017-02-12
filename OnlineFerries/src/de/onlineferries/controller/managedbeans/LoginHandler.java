@@ -33,9 +33,12 @@ public class LoginHandler implements Serializable  {
 		LoginService loginService = serviceLocator.getLoginService();
 		customer = loginService.login(username, password);
 		if (customer == null)
-			return "retry";
-		return "auswahlKundentypLoggedIn";
+			return "login";
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", customer.getCustomer_id());
+		String url = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("url").toString();
+		return url;
 	}
+	
 
 	public String getUsername() {
 		return username;
@@ -76,4 +79,27 @@ public class LoginHandler implements Serializable  {
 			throw new ValidatorException(new FacesMessage(rb.getString("onlineferries_login_form_invalid_password")));
 		}
 	}
+	
+	public void changeCustomerValues(){
+		System.out.println("change " + customer);
+		serviceLocator.getLoginService().changeCustomer(customer);
+	}
+	
+	public String register(){
+		customer = new CustomerView();
+		return "registerUser";
+	}
+	
+	public String registerCustomer(){
+		serviceLocator.getLoginService().registerCustomer(customer);
+		password = customer.getPassword();
+		username = customer.getFirstname();
+		String url = login();
+		if (url != null) {
+			return url;
+		} else {
+			return "/restricted/myOnlineFerries";
+		}
+	}
+	
 }
