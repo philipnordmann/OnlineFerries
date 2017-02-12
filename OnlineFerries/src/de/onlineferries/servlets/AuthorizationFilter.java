@@ -21,7 +21,8 @@ public class AuthorizationFilter implements Filter {
         + "<partial-response><redirect url=\"%s\"></redirect></partial-response>";
 
     @Override
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws ServletException, IOException {    
+    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws ServletException, IOException {
+    	System.out.println("......Filtered......");
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
         HttpSession session = request.getSession(false);
@@ -32,7 +33,7 @@ public class AuthorizationFilter implements Filter {
         boolean resourceRequest = request.getRequestURI().startsWith(request.getContextPath() + ResourceHandler.RESOURCE_IDENTIFIER + "/");
         boolean ajaxRequest = "partial/ajax".equals(request.getHeader("Faces-Request"));
         
-        if (!loginRequest) {
+        if (!loginRequest && !loggedIn) {
         	String url = request.getRequestURI().toString();
         	url = url.substring(0, url.indexOf("."));
         	url = "restricted" + url.substring(url.lastIndexOf("/"));

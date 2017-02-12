@@ -36,6 +36,7 @@ public class LoginHandler implements Serializable  {
 			return "login";
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", customer.getCustomer_id());
 		String url = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("url").toString();
+		System.out.println(url);
 		return url;
 	}
 	
