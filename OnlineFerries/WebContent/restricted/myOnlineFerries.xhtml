@@ -37,7 +37,10 @@
 
 			<div class="col-3">
 				<ul>
-					<li><a href="restricted/showUser.xhtml">#{msg.onlineferries_index_back}</a></li>
+					<li><a href="/OnlineFerries/index.xhtml">#{msg.onlineferries_index_back}</a></li>
+					<li><h:form>
+						<h:commandLink action="#{loginHandler.logout()}" value="#{msg.onlineferries_user_logout}" />
+					</h:form></li>
 				</ul>
 			</div>
 
